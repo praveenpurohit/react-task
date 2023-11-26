@@ -1,38 +1,142 @@
-.App {
-  text-align: center;
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 1024px;
+  margin: 20px auto;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.grid-item {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.close {
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.modal-thumbnails {
+  display: flex;
+  align-items: center;
+  margin-top: 20px; 
+}
+
+.thumbnails-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 5px;
+  padding: 10px; 
+  scroll-behavior: smooth;
+}
+
+.thumbnail-item {
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnail-item.selected {
+  opacity: 5;
+}
+
+.arrow-left,
+.arrow-right {
+  font-size: 40px;
+  cursor: pointer;
+  margin: 0 0px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.arrow-left:hover,
+.arrow-right:hover {
+  color: gray;
+}
+@media screen and (max-width: 768px) {
+  .image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+    margin: 10px;
+  }
+
+  .grid-item {
+    height: 150px;
+  }
+
+  .thumbnails-row {
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+    scroll-snap-type: x mandatory;
+    max-width: 300px;
+    padding: 10px;
+  }
+
+  .thumbnail-item {
+    flex: 0 0 auto;
+    margin-right: 5px;
+    scroll-snap-align: start;
+    width: 45px;
+    height: 35px;
+  }
+  .arrow-left,
+.arrow-right {
+  font-size: 34px;
+  cursor: pointer;
+  margin: 0 10px;
+  color: white;
+}
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 468px) {
+  .thumbnails-row {
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+    scroll-snap-type: x mandatory;
+    max-width: 200px;
+    padding: 5px;
   }
-  to {
-    transform: rotate(360deg);
+  .arrow-left,
+  .arrow-right {
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 10px;
+    color: white;
+  }
+  .thumbnail-item {
+    flex: 0 0 auto;
+    margin-right: 2px;
+    scroll-snap-align: start;
+    width: 40px;
+    height: 35px;
   }
 }
